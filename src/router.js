@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
+import findLast from "lodash/findLast";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import NotFound from "./views/404.vue";
-import Forbidden from "./views/404.vue";
+import Forbidden from "./views/403.vue";
+import { check, isLogin } from "./utils/auth";
 
 Vue.use(Router);
 
@@ -125,13 +127,30 @@ var router = new Router({
     }
   ]
 });
+
 router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start();
   }
+  const record = findLast(to.matched, record => record.meta.authority);
+  if (record && !check(record.meta.authority)) {
+    if (!isLogin() && to.path !== "/user/login") {
+      next({
+        path: "/user/login"
+      });
+    } else if (to.path !== "/403") {
+      next({
+        path: "/403"
+      });
+    }
+    NProgress.done();
+  }
+
   next();
 });
+
 router.afterEach(() => {
   NProgress.done();
 });
+
 export default router;

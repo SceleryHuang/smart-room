@@ -34,6 +34,8 @@
  * SubMenu1.vue https://github.com/vueComponent/ant-design-vue/blob/master/components/menu/demo/SubMenu1.vue
  * */
 import SubMenu from "./SubMenu";
+import { check } from "../utils/auth";
+
 export default {
   props: {
     theme: {
@@ -67,6 +69,38 @@ export default {
     },
     getMenudata(routes = [], parentKeys = [], selectedKeys) {
       const menuData = [];
+      for (let item of routes) {
+        if (item.meta && item.meta.authority && !check(item.meta.authority)) {
+          break;
+        }
+        if (item.name && !item.hideInMenu) {
+          this.openKeysMap[item.path] = parentKeys;
+          this.selectedKeysMap[item.path] = [selectedKeys || item.path];
+          const newItem = { ...item };
+          delete newItem.children;
+          if (item.children && !item.hideChildrenInMenu) {
+            newItem.children = this.getMenudata(item.children, [
+              ...parentKeys,
+              item.path
+            ]);
+          } else {
+            this.getMenudata(
+              item.children,
+              selectedKeys ? parentKeys : [...parentKeys, item.path],
+              selectedKeys || item.path
+            );
+          }
+          menuData.push(newItem);
+        } else if (
+          !item.hideInMenu &&
+          !item.hideChildrenInMenu &&
+          item.children
+        ) {
+          menuData.push(
+            ...this.getMenudata(item.children, [...parentKeys, item.path])
+          );
+        }
+      }
       routes.forEach(item => {
         if (item.name && !item.hideInMenu) {
           this.openKeysMap[item.path] = parentKeys;
