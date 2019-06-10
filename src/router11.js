@@ -4,13 +4,13 @@ import findLast from "lodash/findLast";
 import { notification } from "ant-design-vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import NotFound from "./views/404.vue";
-import Forbidden from "./views/403.vue";
+import NotFound from "./views/404";
+import Forbidden from "./views/403";
 import { check, isLogin } from "./utils/auth";
 
 Vue.use(Router);
 
-var router = new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -142,7 +142,7 @@ router.beforeEach((to, from, next) => {
     } else if (to.path !== "/403") {
       notification.error({
         message: "403",
-        description: "你没有权限访问，请联系管理员"
+        description: "你没有权限访问，请联系管理员咨询。"
       });
       next({
         path: "/403"

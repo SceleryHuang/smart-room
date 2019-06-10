@@ -19,7 +19,7 @@
           :key="item.path"
           @click="() => $router.push({ path: item.path, query: $route.query })"
         >
-          <a-icon v-if="item.meta.icon" type="item.meta.icon" />
+          <a-icon v-if="item.meta.icon" :type="item.meta.icon" />
           <span>{{ item.meta.title }}</span>
         </a-menu-item>
         <sub-menu v-else :menu-info="item" :key="item.path" />
@@ -101,35 +101,7 @@ export default {
           );
         }
       }
-      routes.forEach(item => {
-        if (item.name && !item.hideInMenu) {
-          this.openKeysMap[item.path] = parentKeys;
-          this.selectedKeysMap[item.path] = [selectedKeys || item.path];
-          const newItem = { ...item };
-          delete newItem.children;
-          if (item.children && !item.hideChildrenInMenu) {
-            newItem.children = this.getMenudata(item.children, [
-              ...parentKeys,
-              item.path
-            ]);
-          } else {
-            this.getMenudata(
-              item.children,
-              selectedKeys ? parentKeys : [...parentKeys, item.path],
-              selectedKeys || item.path
-            );
-          }
-          menuData.push(newItem);
-        } else if (
-          !item.hideInMenu &&
-          !item.hideChildrenInMenu &&
-          item.children
-        ) {
-          menuData.push(
-            ...this.getMenudata(item.children, [...parentKeys, item.path])
-          );
-        }
-      });
+
       return menuData;
     }
   }
