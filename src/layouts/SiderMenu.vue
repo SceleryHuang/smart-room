@@ -59,8 +59,8 @@ export default {
     return {
       collapsed: false,
       menuData,
-      openKeys: this.collapsed ? [] : this.openKeysMap[this.$route.path],
-      selectedKeys: this.selectedKeysMap[this.$route.path]
+      selectedKeys: this.selectedKeysMap[this.$route.path],
+      openKeys: this.collapsed ? [] : this.openKeysMap[this.$route.path]
     };
   },
   methods: {
