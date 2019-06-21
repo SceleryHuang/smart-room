@@ -1,7 +1,12 @@
 import Vue from "vue";
+import VueI18n from "vue-i18n";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index.js";
+import zhCN from "./locale/zhCN";
+import enUS from "./locale/enUS";
+import queryString from "query-string";
+
 import {
   Button,
   Layout,
@@ -11,12 +16,16 @@ import {
   Menu,
   Form,
   Input,
-  Select
+  Select,
+  LocaleProvider,
+  Dropdown,
+  DatePicker
 } from "ant-design-vue";
 import Authorized from "./components/Authorized";
 import Auth from "./directives/auth";
 
 Vue.config.productionTip = false;
+
 Vue.use(Button);
 Vue.use(Layout);
 Vue.use(Icon);
@@ -28,7 +37,18 @@ Vue.use(Auth);
 Vue.use(Form);
 Vue.use(Input);
 Vue.use(Select);
+Vue.use(LocaleProvider);
+Vue.use(Dropdown);
+Vue.use(DatePicker);
+Vue.use(VueI18n);
 
+const i18n = new VueI18n({
+  locale: queryString.parse(location.search).locale || "zhCN",
+  messages: {
+    zhCN: { message: zhCN },
+    enUS: { message: enUS }
+  }
+});
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1252088_0w26iv0litn.js" // 在 iconfont.cn 上生成
 });
@@ -36,6 +56,7 @@ const IconFont = Icon.createFromIconfontCN({
 Vue.component("IconFont", IconFont);
 
 new Vue({
+  i18n,
   router,
   store,
   render: h => h(App)
