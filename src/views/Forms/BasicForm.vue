@@ -94,7 +94,7 @@ export default {
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values);
+          // console.log(values);
           Object.assign(this, values);
         }
       });

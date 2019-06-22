@@ -31,8 +31,7 @@
     <Authorized :authority="['admin']">
       <setting-drawer></setting-drawer>
     </Authorized>
-
-    <router-view></router-view>
+    <!--<router-view></router-view>-->
   </div>
 </template>
 

@@ -6,7 +6,7 @@ import store from "./store/index.js";
 import zhCN from "./locale/zhCN";
 import enUS from "./locale/enUS";
 import queryString from "query-string";
-
+import VueHighlightJS from "vue-highlightjs";
 import {
   Button,
   Layout,
@@ -23,6 +23,7 @@ import {
 } from "ant-design-vue";
 import Authorized from "./components/Authorized";
 import Auth from "./directives/auth";
+import "highlight.js/styles/github.css";
 
 Vue.config.productionTip = false;
 
@@ -41,7 +42,7 @@ Vue.use(LocaleProvider);
 Vue.use(Dropdown);
 Vue.use(DatePicker);
 Vue.use(VueI18n);
-
+Vue.use(VueHighlightJS);
 const i18n = new VueI18n({
   locale: queryString.parse(location.search).locale || "zhCN",
   messages: {

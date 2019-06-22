@@ -3,17 +3,21 @@
     {{ $t("message")["app.dashboard.analysis.timeLabel"] }} :
     <a-date-picker></a-date-picker>
     <Chart :option="chartOption" style="height: 400px" />
+    <pre v-highlightjs="chartCode"><code class="html"></code></pre>
   </div>
 </template>
 
 <script>
 import Chart from "../../components/Chart";
 import request from "../../utils/request";
+import chartCode from "!!raw-loader!../../components/Chart";
+
 export default {
   data() {
     return {
       // 指定图表的配置项和数据
-      chartOption: {}
+      chartOption: {},
+      chartCode
     };
   },
   mounted() {
