@@ -9,7 +9,7 @@
         v-model="collapsed"
         width="256px"
       >
-        <div class="logo">Ant Design Vue</div>
+        <logo></logo>
         <SiderMenu :theme="navTheme"></SiderMenu>
       </a-layout-sider>
       <a-layout>
@@ -40,11 +40,19 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import SettingDrawer from "../components/SettingDrawer";
+import Logo from "./Logo";
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
+      date: new Date()
     };
+  },
+  mounted() {
+    let _this = this;
+    this.timer = setInterval(() => {
+      _this.date = new Date();
+    }, 1000);
   },
   computed: {
     navTheme() {
@@ -58,7 +66,13 @@ export default {
     Header,
     Footer,
     SiderMenu,
-    SettingDrawer
+    SettingDrawer,
+    Logo
+  },
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 };
 </script>
@@ -72,12 +86,7 @@ export default {
 .trigger:hover {
   background: #eee;
 }
-.logo {
-  height: 64px;
-  line-height: 64px;
-  text-align: center;
-  overflow: hidden;
-}
+
 .nav-theme-dark >>> .logo {
   color: #ffffff;
 }
