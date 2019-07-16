@@ -9,7 +9,14 @@
         v-model="collapsed"
         width="256px"
       >
-        <logo></logo>
+        <logo
+          :theme="navTheme"
+          style="border:1px solid;margin: 10px 5px;padding: 10px 5px"
+        ></logo>
+        <weather
+          :theme="navTheme"
+          style="border:1px solid;margin: 10px 5px;padding: 10px 5px"
+        ></weather>
         <SiderMenu :theme="navTheme"></SiderMenu>
       </a-layout-sider>
       <a-layout>
@@ -41,6 +48,7 @@ import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import SettingDrawer from "../components/SettingDrawer";
 import Logo from "./Logo";
+import Weather from "./Weather";
 export default {
   data() {
     return {
@@ -67,7 +75,8 @@ export default {
     Footer,
     SiderMenu,
     SettingDrawer,
-    Logo
+    Logo,
+    Weather
   },
   beforeDestroy() {
     if (this.timer) {

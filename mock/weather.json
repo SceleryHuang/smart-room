@@ -1,0 +1,26 @@
+{
+  "ret": true,
+  "data": {
+    "weather_detail": "小雨15度",
+    "weather_suggList": [
+      {
+        "id": 1,
+        "imgUrl": "@/layouts/pic/dressing.png",
+        "label": "穿衣指数",
+        "degree": "较舒适"
+      },
+      {
+        "id": 2,
+        "imgUrl": "@/layouts/pic/flu.png",
+        "label": "感冒指数",
+        "degree": "易发"
+      },
+      {
+        "id": 3,
+        "imgUrl": "@/layouts/pic/uv.png",
+        "label": "紫外线指数",
+        "degree": "最弱"
+      }
+    ]
+  }
+}
