@@ -3,7 +3,7 @@
     <div class="logo_date">{{ date | formaDate1 }}</div>
     <div class="logo_date">{{ date | formaDate2 }}</div>
     <div class="logo_word">智能家居系统</div>
-    <img class="logo-img" src="./pic/house.png" />
+    <img class="logo-img" src="../../public/pic/house.png" />
     <button class="logo-btn">模式设置</button>
     <button class="logo-btn">手动</button>
   </div>
@@ -70,8 +70,8 @@ export default {
 }
 
 .logo-btn {
-  height: 30px;
-  width: 75px;
+  height: 40px;
+  width: 85px;
   position: relative;
   display: block;
   margin-left: 85px;

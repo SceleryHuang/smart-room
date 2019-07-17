@@ -1,21 +1,15 @@
 <template>
   <div class="logo">
     <div class="logo_word">天气</div>
-    <img class="logo-img" src="./pic/heavy_snow.png" />
-    <div>{{ item.weather_detail }}</div>
-    <ul>
-      <router-link
-        tag="li"
-        class="item border-bottom"
-        v-for="item of list"
-        :key="item.id"
-        :to="'/weather/' + item.id"
-      >
+    <img class="logo-img" src="../../public/pic/heavy_snow.png" />
+    <div>{{ weather_detail }}</div>
+    <ul class="weather-ul">
+      <li v-for="item of weather_suggList" :key="item.id" class="weather-li">
         <div>
           <img :src="item.imgUrl" />{{ item.label }}
-          <div>{{ item.degree }}</div>
+          <div class="weather-degree">{{ item.degree }}</div>
         </div>
-      </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -24,26 +18,35 @@
 export default {
   data() {
     return {
-      weather: "小雨15度"
+      weather_detail: "小雨15度",
+      weather_suggList: [
+        {
+          id: 1,
+          imgUrl: require("../../public/pic/dressing.png"),
+          label: "穿衣指数",
+          degree: "较舒适"
+        },
+        {
+          id: 2,
+          imgUrl: require("../../public/pic/flu.png"),
+          label: "感冒指数",
+          degree: "易发"
+        },
+        {
+          id: 3,
+          imgUrl: require("../../public/pic/uv.png"),
+          label: "紫外线指数",
+          degree: "最弱"
+        }
+      ]
     };
-  },
-  props: {
-    list: Array
   }
 };
 </script>
 
 <style>
 .logo {
-  /*height: 64px;*/
-  /*line-height: 64px;*/
   text-align: center;
-}
-.logo_date {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  font-size: 25px;
 }
 .logo_word {
   font-size: 25px;
@@ -52,13 +55,17 @@ export default {
   text-align: center;
   position: relative;
 }
-
-.logo-btn {
-  height: 30px;
-  width: 75px;
-  position: relative;
-  display: block;
-  margin-left: 85px;
-  margin-top: 15px;
+.weather-li {
+  list-style: none;
+  text-align: center;
+  font-size: 15px;
+  height: 65px;
+  margin-left: -50px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.weather-degree {
+  padding-left: 40px;
+  text-align: center;
 }
 </style>
